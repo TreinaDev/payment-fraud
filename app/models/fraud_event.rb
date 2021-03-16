@@ -1,0 +1,2 @@
+class FraudEvent < ApplicationRecord
+end
