@@ -1,8 +1,19 @@
 require 'rails_helper'
 
-describe 'billing management' do
+describe 'payment management' do
   context 'POST payment' do
-    it 'should return a payment data sucessfully' do
+    it 'should create a valid payment' do
+      params = { payment_method: payment_method, 
+                  customer_token: 'a1s2d3f4',
+                  cpf: '123.123.123-12', 
+                  plan_id: '1' }
+      
+      post '/api/v1/payment', params: params
+
+      expect(Payment.all.count).to eq 1
+    end
+
+    xit 'should return a payment data sucessfully' do
       resp_json = [{"payment_token": "XYZ", "payment_method": "Boleto"}]
       payment_doule = double('Payment', status: 200, body: resp_json)
       allow(Faraday).to receive(:post).with('/api/v1/payment').and_return(payment_doule)

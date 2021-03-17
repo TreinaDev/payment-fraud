@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_211321) do
+ActiveRecord::Schema.define(version: 2021_03_17_230253) do
 
   create_table "fraud_events", force: :cascade do |t|
     t.string "cpf"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_211321) do
     t.string "plan_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "payment_token"
     t.index ["payment_method_id"], name: "index_payments_on_payment_method_id"
   end
 
