@@ -5,13 +5,9 @@ module Api
         payment = Payment.new(payment_params)
         payment.payment_token = payment.generate_token
 
-        if payment.save
-          #render json  
-        else
-          #
-        end
+        render json: payment if payment.save
       end
-      
+
       private
 
       def payment_params
