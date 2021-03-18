@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_205443) do
+ActiveRecord::Schema.define(version: 2021_03_18_144217) do
 
   create_table "fraud_events", force: :cascade do |t|
     t.string "cpf"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_205443) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "max_installments"
     t.string "code"
+    t.integer "status", default: 0, null: false
   end
 
   create_table "payments", force: :cascade do |t|

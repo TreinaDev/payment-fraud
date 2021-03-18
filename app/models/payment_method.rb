@@ -1,4 +1,5 @@
 class PaymentMethod < ApplicationRecord
   has_one_attached :icon
-  validates :name, :max_installments, :code, presence: true
+  enum status: { inactive: 0, active: 3 }
+  validates :name, :max_installments, :code, :status, presence: true
 end
