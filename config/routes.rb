@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      resources 'payment', only: %i[ new create ]
+      resources :payments, only: %i[ show create ]
     end
   end
 end

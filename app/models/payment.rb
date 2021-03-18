@@ -5,8 +5,11 @@ class Payment < ApplicationRecord
             :plan_id, :payment_token, presence: true
   validates :payment_token, uniqueness: { message: 'token deve ser único' }
 
+  before_validation :generate_token
 
+  private
+  
   def generate_token
-    SecureRandom.hex
+    self.payment_token = SecureRandom.hex
   end
 end
