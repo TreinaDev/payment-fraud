@@ -1,4 +1,4 @@
 [
-  {"name": "Cartão de crédito", "code": "CCRED"},
-  {"name": "Boleto", "code": "BOLETO"}
+  {"name": "Cartão de crédito", "code": "CCRED", "max_installments": 5},
+  {"name": "Boleto", "code": "BOLETO", "max_installments": 2}
 ]
