@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_211321) do
+ActiveRecord::Schema.define(version: 2021_03_16_235759) do
 
   create_table "fraud_events", force: :cascade do |t|
     t.string "cpf"
     t.integer "event_severity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "negative_lists", force: :cascade do |t|
+    t.string "cpf", null: false
+    t.date "expiration_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
