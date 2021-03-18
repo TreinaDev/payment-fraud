@@ -3,14 +3,22 @@ require 'rails_helper'
 describe 'payment management' do
   context 'POST payment' do
     it 'should create a valid payment' do
-      params = { payment_method: payment_method, 
+      payment_method = PaymentMethod.create
+      params = { payment: 
+                  { payment_method_id: payment_method.id, 
                   customer_token: 'a1s2d3f4',
                   cpf: '123.123.123-12', 
                   plan_id: '1' }
+                }
+      payment_before_count = Payment.count
       
       post '/api/v1/payment', params: params
 
-      expect(Payment.all.count).to eq 1
+      payment = Payment.last
+      expect(payment.customer_token).to eq 'a1s2d3f4'
+      expect(payment.plan_id).to eq '1'
+      expect(payment.payment_method_id).to eq payment_method.id
+      expect(Payment.count).to be > payment_before_count
     end
 
     xit 'should return a payment data sucessfully' do
@@ -18,7 +26,7 @@ describe 'payment management' do
       payment_doule = double('Payment', status: 200, body: resp_json)
       allow(Faraday).to receive(:post).with('/api/v1/payment').and_return(payment_doule)
 
-      post '/api/v1/payment'
+      response = post '/api/v1/payment'
 
       json_response = JSON.parse(response.body, symbolize_names: true)
 
