@@ -8,7 +8,7 @@ module Api
         if payment.save
           render status: '201', json: payment
         else
-          render status: '422', json: { message: 'parâmetros inválidos' }
+          render status: :unprocessable_entity, json: { errors: payment.errors.full_messages }
         end
       end
 
