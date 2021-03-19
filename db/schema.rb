@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_230253) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "payment_token"
     t.index ["payment_method_id"], name: "index_payments_on_payment_method_id"
+    t.index ["payment_token"], name: "index_payments_on_payment_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|

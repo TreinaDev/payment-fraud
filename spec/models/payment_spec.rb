@@ -22,16 +22,17 @@ describe Payment do
       payment_method = PaymentMethod.create
       payment_first = Payment.create!(payment_method: payment_method,
                                       customer_token: 'a1s2d3f4',
+                                      payment_token: '1a2s3d4f5g6h7j',
                                       cpf: '123.123.123-12', plan_id: '1')
 
-      payment_invalid = Payment.create!(payment_method: payment_method,
-                                        customer_token: 'a1s2d3f4',
-                                        cpf: '123.123.123-12', plan_id: '1')
+      payment_invalid = Payment.new(payment_method: payment_method,
+                                    customer_token: 'a1s2d3f4',
+                                    payment_token: '1a2s3d4f5g6h7j',
+                                    cpf: '123.123.123-12', plan_id: '1')
 
-      payment_invalid.payment_token = payment_first.payment_token
-
-      expect(payment_invalid.valid?).to be_falsy
-      expect(payment_invalid.errors[:payment_token]).to include('token deve ser único')
+      expect(payment_invalid.payment_token).to eq(payment_first.payment_token)
+      expect(payment_invalid.valid?).to eq false
+      expect(payment_invalid.errors[:payment_token]).to include('Token deve ser único')
     end
   end
 end

@@ -136,7 +136,6 @@ pt-BR:
       too_short:
         one: 'é muito curto (mínimo: 1 caracter)'
         other: 'é muito curto (mínimo: %{count} caracteres)'
-      unique: 'deve ser único'
       wrong_length:
         one: não possui o tamanho esperado (1 caracter)
         other: não possui o tamanho esperado (%{count} caracteres)
