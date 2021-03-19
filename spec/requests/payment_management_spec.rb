@@ -31,7 +31,7 @@ describe 'payment management' do
       post '/api/v1/payments', params: params
       json_response = JSON.parse(response.body, symbolize_names: true)
 
-      expect(response).to have_http_status(201)
+      expect(response).to have_http_status(:created)
       expect(json_response[:payment_token]).to eq(Payment.last.payment_token)
       expect(json_response[:customer_token]).to eq('a1s2d3f4')
     end
@@ -45,7 +45,7 @@ describe 'payment management' do
 
       post '/api/v1/payments', params: params
 
-      expect(response).to have_http_status(422)
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 
@@ -61,7 +61,7 @@ describe 'payment management' do
 
       json_response = JSON.parse(response.body, symbolize_names: true)
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(json_response[:customer_token]).to eq('a1s2d3f4')
       expect(json_response[:cpf]).to eq('123.123.123-12')
     end

@@ -6,7 +6,7 @@ module Api
         payment = Payment.new(payment_params)
 
         if payment.save
-          render status: '201', json: payment
+          render status: :created, json: payment
         else
           render status: :unprocessable_entity, json: { errors: payment.errors.full_messages }
         end
