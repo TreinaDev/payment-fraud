@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 2021_03_18_175347) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "negative_lists", force: :cascade do |t|
+    t.string "cpf", null: false
+    t.date "expiration_date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "payment_methods", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
