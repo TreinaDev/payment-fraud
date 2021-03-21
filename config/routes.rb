@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   namespace 'api', defaults: { format: :json } do
     namespace 'v1' do
+      resources :payment_methods, only: [:index]
       resources :cpfs, only: [:show], param: :cpf
-    end 
+    end
   end
 end
+
