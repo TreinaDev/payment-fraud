@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Payment do
   context 'create new payment' do
     it 'successfully with all params' do
-      payment_method = PaymentMethod.create
+      payment_method = FactoryBot.create(:payment_method)
       payment = Payment.create!(payment_method: payment_method, customer_token: 'a1s2d3f4',
                                 cpf: '123.123.123-12', plan_id: '1')
 
@@ -19,7 +19,7 @@ describe Payment do
     end
 
     it 'payment token must be uniq' do
-      payment_method = PaymentMethod.create
+      payment_method = FactoryBot.create(:payment_method)
       payment_first = Payment.create!(payment_method: payment_method,
                                       customer_token: 'a1s2d3f4',
                                       payment_token: '1a2s3d4f5g6h7j',
