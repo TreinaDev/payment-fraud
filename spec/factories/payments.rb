@@ -4,5 +4,6 @@ FactoryBot.define do
     cpf { "MyString" }
     customer_token { "MyString" }
     plan_id { "MyString" }
+    sequence(:payment_token) { |n| "token-#{n}" }
   end
 end

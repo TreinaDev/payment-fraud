@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        payment:
+          attributes:
+            payment_token: 
+              unique: Token deve ser único 
