@@ -1,10 +1,8 @@
-require 'cpf_cnpj'
-
 module Api
   module V1
     class CpfsController < ApiController
-      def show        
-        if CPF.new(params[:cpf]).valid?
+      def show
+        if Cpf.valid?(params[:cpf])
           return render json: { blocked: Cpf.blocked?(params[:cpf]) }, status: :ok
         end
 
