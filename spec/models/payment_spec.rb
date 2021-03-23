@@ -4,7 +4,8 @@ describe Payment do
   context 'create new payment' do
     it 'successfully with all params' do
       payment_method = FactoryBot.create(:payment_method)
-      payment = Payment.create!(payment_method: payment_method, customer_token: 'a1s2d3f4',
+      payment = Payment.create!(payment_method: payment_method, 
+                                customer_token: 'a1s2d3f4',
                                 cpf: '123.123.123-12', plan_id: '1')
 
       expect(Payment.all.size).to eq 1
@@ -33,6 +34,27 @@ describe Payment do
       expect(payment_invalid.payment_token).to eq(payment_first.payment_token)
       expect(payment_invalid.valid?).to eq false
       expect(payment_invalid.errors[:payment_token]).to include('Token deve ser único')
+    end
+
+    it 'payment must include a valid plan price and discounted price' do
+      payment_method = FactoryBot.create(:payment_method)
+      payment = Payment.new(payment_method: payment_method, 
+                            customer_token: 'a1s2d3f4',
+                            cpf: '123.123.123-12', plan_id: '1', 
+                            plan_price: nil )
+
+      expect(payment.valid?).to be_falsy
+    end
+  end
+
+  context 'payment status' do
+    it 'is pending when created' do
+      payment_method = FactoryBot.create(:payment_method)
+      payment = Payment.create!(payment_method: payment_method, 
+                                customer_token: 'a1s2d3f4',
+                                cpf: '123.123.123-12', plan_id: '1')
+
+      expect(payment.status).to eq('pending')
     end
   end
 end

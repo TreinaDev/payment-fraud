@@ -6,4 +6,6 @@ class Payment < ApplicationRecord
   validates :customer_token, :cpf,
             :plan_id, presence: true
   validates :payment_token, uniqueness: { message: :unique }
+
+  enum status: { pending: 0, approved: 5, refused: 10 }
 end
