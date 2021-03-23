@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "cpf_cnpj"
+require 'cpf_cnpj'
 
 describe 'Consult CPF' do
   context 'GET CPF' do
@@ -37,7 +37,7 @@ describe 'Consult CPF' do
     end
 
     it 'with CPF valid' do
-      cpf = CPF.generate 
+      cpf = CPF.generate
 
       get "/api/v1/cpfs/#{cpf}"
 
@@ -45,7 +45,6 @@ describe 'Consult CPF' do
 
       expect(response).to have_http_status(200)
       expect(json_response[:blocked]).to eq(false)
-      
     end
 
     it 'with CPF invalid' do
@@ -57,10 +56,6 @@ describe 'Consult CPF' do
 
       expect(response).to have_http_status(400)
       expect(json_response[:error_message]).to eq('CPF inválido')
-      
     end
-
   end
 end
-
-
