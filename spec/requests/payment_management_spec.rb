@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'payment management' do
   context 'POST payment' do
     it 'should create a valid payment' do
-      payment_method = FactoryBot.create(:payment_method)
+      payment_method = create(:payment_method)
       params = { payment:
                   { payment_method_id: payment_method.id,
                     customer_token: 'a1s2d3f4',
@@ -21,7 +21,7 @@ describe 'payment management' do
     end
 
     it 'should return a payment data sucessfully' do
-      payment_method = FactoryBot.create(:payment_method)
+      payment_method = create(:payment_method)
       params = { payment:
                   { payment_method_id: payment_method.id,
                     customer_token: 'a1s2d3f4',
@@ -51,7 +51,7 @@ describe 'payment management' do
 
   context 'GET payment' do
     it 'should render a payment information' do
-      payment_method = FactoryBot.create(:payment_method)
+      payment_method = create(:payment_method)
       payment = Payment.create!(payment_method_id: payment_method.id,
                                 customer_token: 'a1s2d3f4',
                                 cpf: '123.123.123-12',
@@ -76,8 +76,8 @@ describe 'payment management' do
     end
 
     it 'should get status payment as approved' do
-      payment_method = FactoryBot.create(:payment_method)
-      payment = FactoryBot.create(:payment, payment_method: payment_method, status: :pending, plan_id: "1" )
+      payment_method = create(:payment_method)
+      payment = create(:payment, payment_method: payment_method, status: :pending, plan_id: '1')
 
       get "/api/v1/payments/#{payment.customer_token}"
       payment.approved!
@@ -87,8 +87,8 @@ describe 'payment management' do
     end
 
     it 'should get status payment as refused' do
-      payment_method = FactoryBot.create(:payment_method)
-      payment = FactoryBot.create(:payment, payment_method: payment_method, status: :pending, plan_id: "1" )
+      payment_method = create(:payment_method)
+      payment = create(:payment, payment_method: payment_method, status: :pending, plan_id: '1')
 
       get "/api/v1/payments/#{payment.customer_token}"
       payment.refused!

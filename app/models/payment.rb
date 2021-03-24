@@ -10,14 +10,13 @@ class Payment < ApplicationRecord
   validates :payment_token, uniqueness: { message: :unique }
 
   def change_status
-    return false unless self.pending?
+    return false unless pending?
 
     success_rate = rand(1..10)
-    puts "success #{success_rate}"
     if success_rate <= 2
-      self.refused!
+      refused!
     else
-      self.approved!
+      approved!
     end
   end
 end
