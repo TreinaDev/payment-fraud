@@ -5,12 +5,12 @@ describe 'Payment methods management' do
     it 'should render all payment methods' do
       pm = create(:payment_method, status: :active)
       pm.icon.attach(
-        io: File.open(Rails.root.join('spec' / 'support' / 'storage' / 'mastercard_icon.svg')),
+        io: File.open(Rails.root.join('spec/support/storage/mastercard_icon.svg')),
         filename: 'mastercard_icon.svg'
       )
       other_pm = create(:payment_method, name: 'Boleto', code: 'BOLETO', max_installments: 5, status: :active)
       other_pm.icon.attach(
-        io: File.open(Rails.root.join('spec' / 'support' / 'storage' / 'boleto.svg')),
+        io: File.open(Rails.root.join('spec/support/storage/boleto.svg')),
         filename: 'boleto.svg'
       )
 
