@@ -24,10 +24,20 @@ module Api
         render json: payment, status: :ok
       end
 
+      def update
+        payment = Payment.find_by(customer_token: params[:customer_token])
+
+        if payment.update(payment_params)
+          render json: payment, status: :ok
+        else
+          render json: { message: 'erro no pagamento'}, status: :request_timeout 
+        end
+      end
+
       private
 
       def payment_params
-        params.require(:payment).permit(:payment_method_id, :cpf, :customer_token, :plan_id)
+        params.require(:payment).permit(:payment_method_id, :cpf, :customer_token, :plan_id, :status)
       end
     end
   end
