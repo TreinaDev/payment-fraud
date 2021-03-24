@@ -4,9 +4,15 @@ describe 'Payment methods management' do
   context 'GET payment methods' do
     it 'should render all payment methods' do
       pm = create(:payment_method, status: :active)
-      pm.icon.attach(io: File.open(Rails.root.join('spec', 'support', 'storage', 'mastercard_icon.svg')), filename: 'mastercard_icon.svg')
+      pm.icon.attach(
+        io: File.open(Rails.root.join('spec' / 'support' / 'storage' / 'mastercard_icon.svg')),
+        filename: 'mastercard_icon.svg'
+      )
       other_pm = create(:payment_method, name: 'Boleto', code: 'BOLETO', max_installments: 5, status: :active)
-      other_pm.icon.attach(io: File.open(Rails.root.join('spec', 'support', 'storage', 'boleto.svg')), filename: 'boleto.svg')
+      other_pm.icon.attach(
+        io: File.open(Rails.root.join('spec' / 'support' / 'storage' / 'boleto.svg')),
+        filename: 'boleto.svg'
+      )
 
       get '/api/v1/payment_methods'
 
@@ -24,7 +30,6 @@ describe 'Payment methods management' do
     end
 
     it 'should return empty if do not have any payment method registered' do
-
       get '/api/v1/payment_methods'
 
       json_response = JSON.parse(response.body, symbolize_names: true)
