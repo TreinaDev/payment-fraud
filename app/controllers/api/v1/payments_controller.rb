@@ -14,20 +14,21 @@ module Api
 
       # GET /api/v1/payments/:id
       def show
-        payment = Payment.find_by(params[:id])
+        payment = Payment.find_by(customer_token: params[:id])
 
         if payment.nil?
           return render status: :not_found,
                         json: { message: 'não encontrado' }
         end
 
+        payment.change_status
         render json: payment, status: :ok
       end
 
       private
 
       def payment_params
-        params.require(:payment).permit(:payment_method_id, :cpf, :customer_token, :plan_id)
+        params.require(:payment).permit(:payment_method_id, :cpf, :customer_token, :plan_id, :status)
       end
     end
   end

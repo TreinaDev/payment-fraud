@@ -57,7 +57,7 @@ describe 'payment management' do
                                 cpf: '123.123.123-12',
                                 plan_id: '1')
 
-      get "/api/v1/payments/#{payment.id}"
+      get "/api/v1/payments/#{payment.customer_token}"
 
       json_response = JSON.parse(response.body, symbolize_names: true)
 
@@ -73,6 +73,28 @@ describe 'payment management' do
 
       expect(response).to have_http_status(:not_found)
       expect(json_response[:message]).to eq('não encontrado')
+    end
+
+    it 'should get status payment as approved' do
+      payment_method = FactoryBot.create(:payment_method)
+      payment = FactoryBot.create(:payment, payment_method: payment_method, status: :pending, plan_id: "1" )
+
+      get "/api/v1/payments/#{payment.customer_token}"
+      payment.approved!
+
+      payment.reload
+      expect(payment.status).to eq('approved')
+    end
+
+    it 'should get status payment as refused' do
+      payment_method = FactoryBot.create(:payment_method)
+      payment = FactoryBot.create(:payment, payment_method: payment_method, status: :pending, plan_id: "1" )
+
+      get "/api/v1/payments/#{payment.customer_token}"
+      payment.refused!
+
+      payment.reload
+      expect(payment.status).to eq('refused')
     end
   end
 end
