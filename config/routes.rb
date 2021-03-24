@@ -6,6 +6,6 @@ Rails.application.routes.draw do
       resources :payment_methods, only: [:index]
       resources :cpfs, only: [:show], param: :cpf
       resources :payments, only: %i[ show create update ]
-    end 
+    end
   end
 end
