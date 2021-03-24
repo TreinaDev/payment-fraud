@@ -6,6 +6,7 @@ ruby '2.7.2'
 gem 'rails', '~> 6.1.3'
 
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'cpf_cnpj'
 gem 'devise', '~> 4.7.3'
 gem 'faraday'
 gem 'puma', '~> 5.0'
