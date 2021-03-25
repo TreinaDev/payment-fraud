@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace 'v1' do
       resources :payment_methods, only: [:index]
       resources :cpfs, only: [:show], param: :cpf
-      resources :payments, only: %i[ show create update ]
+      resources :payments, only: %i[ show create update ], param: :token
     end
   end
 end
