@@ -12,8 +12,8 @@ class Payment < ApplicationRecord
   def change_status
     return false unless pending?
 
-    success_rate = rand(1..10)
-    if success_rate <= 2
+    success_rate = Random.rand
+    if success_rate <= 0.2
       refused!
     else
       approved!

@@ -57,7 +57,7 @@ describe 'payment management' do
                                 cpf: '123.123.123-12',
                                 plan_id: '1')
 
-      get "/api/v1/payments/#{payment.customer_token}"
+      get "/api/v1/payments/#{payment.payment_token}"
 
       json_response = JSON.parse(response.body, symbolize_names: true)
 
@@ -77,24 +77,46 @@ describe 'payment management' do
 
     it 'should get status payment as approved' do
       payment_method = create(:payment_method)
-      payment = create(:payment, payment_method: payment_method, status: :pending, plan_id: '1')
+      payment = create(:payment,
+                       cpf: '123.123.123-12',
+                       customer_token: 'a1s2d3f4',
+                       payment_method: payment_method,
+                       status: :pending,
+                       plan_id: '1')
+      allow(Random).to receive(:rand).and_return(0.21)
 
-      get "/api/v1/payments/#{payment.customer_token}"
-      payment.approved!
+      get "/api/v1/payments/#{payment.payment_token}"
 
-      payment.reload
-      expect(payment.status).to eq('approved')
+      json_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:ok)
+      expect(json_response[:customer_token]).to eq('a1s2d3f4')
+      expect(json_response[:cpf]).to eq('123.123.123-12')
+      expect(json_response[:status]).to eq('approved')
+      expect(json_response[:payment_method]).to eq(payment_method.code)
+      expect(json_response[:payment_token]).to be_kind_of(String)
     end
 
     it 'should get status payment as refused' do
       payment_method = create(:payment_method)
-      payment = create(:payment, payment_method: payment_method, status: :pending, plan_id: '1')
+      payment = create(:payment,
+                       cpf: '123.123.123-12',
+                       customer_token: 'a1s2d3f4',
+                       payment_method: payment_method,
+                       status: :pending,
+                       plan_id: '1')
+      allow(Random).to receive(:rand).and_return(0.19)
 
-      get "/api/v1/payments/#{payment.customer_token}"
-      payment.refused!
+      get "/api/v1/payments/#{payment.payment_token}"
 
-      payment.reload
-      expect(payment.status).to eq('refused')
+      json_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:ok)
+      expect(json_response[:customer_token]).to eq('a1s2d3f4')
+      expect(json_response[:cpf]).to eq('123.123.123-12')
+      expect(json_response[:status]).to eq('refused')
+      expect(json_response[:payment_method]).to eq(payment_method.code)
+      expect(json_response[:payment_token]).to be_kind_of(String)
     end
   end
 end
