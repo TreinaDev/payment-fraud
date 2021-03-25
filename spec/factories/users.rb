@@ -1,4 +1,5 @@
-# FactoryBot.define do
-#   factory :user do
-#   end
-# end
+FactoryBot.define do
+  factory :user do
+    email { '' }
+  end
+end

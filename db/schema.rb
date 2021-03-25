@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_135056) do
     t.integer "event_severity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
   end
 
   create_table "negative_lists", force: :cascade do |t|
