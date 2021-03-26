@@ -12,7 +12,7 @@ module Api
         end
       end
 
-      # GET /api/v1/payments/:id
+      # GET /api/v1/payments/:token
       def show
         payment = Payment.find_by(payment_token: params[:token])
 
