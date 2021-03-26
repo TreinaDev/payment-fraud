@@ -15,14 +15,16 @@ module Api
 
       # GET /api/v1/payments/:id
       def show
-        payment = Payment.find_by(params[:id])
+        payment = Payment.find_by(payment_token: params[:token])
 
         if payment.nil?
           return render status: :not_found,
                         json: { message: 'não encontrado' }
         end
 
-        render json: payment, status: :ok
+        payment.change_status
+        render json: payment.as_json(only: %i[status customer_token payment_token cpf])
+                            .merge({ 'payment_method' => payment.payment_method.code })
       end
 
       private

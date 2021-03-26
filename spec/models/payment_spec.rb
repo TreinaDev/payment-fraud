@@ -72,4 +72,34 @@ describe Payment do
       expect(payment.status).to eq('pending')
     end
   end
+
+  context '.change_status' do
+    it 'status should be approved if random bigger or equal than 0.21' do
+      payment_method = FactoryBot.create(:payment_method)
+      payment = Payment.create!(payment_method: payment_method,
+                                customer_token: 'a1s2d3f4',
+                                payment_token: '1a2s3d4f5g6h7j',
+                                cpf: '123.123.123-12', plan_price: 100.00,
+                                plan_id: '1')
+      allow(Random).to receive(:rand).and_return(0.21)
+
+      payment.change_status
+
+      expect(payment.status).to eq('approved')
+    end
+
+    it 'status should be approved if random less or equal than 0.19' do
+      payment_method = FactoryBot.create(:payment_method)
+      payment = Payment.create!(payment_method: payment_method,
+                                customer_token: 'a1s2d3f4',
+                                payment_token: '1a2s3d4f5g6h7j',
+                                cpf: '123.123.123-12', plan_price: 100.00,
+                                plan_id: '1')
+      allow(Random).to receive(:rand).and_return(0.19)
+
+      payment.change_status
+
+      expect(payment.status).to eq('refused')
+    end
+  end
 end

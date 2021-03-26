@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_002318) do
+ActiveRecord::Schema.define(version: 2021_03_24_135056) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_002318) do
     t.integer "event_severity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
   end
 
   create_table "negative_lists", force: :cascade do |t|
@@ -71,9 +72,9 @@ ActiveRecord::Schema.define(version: 2021_03_24_002318) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "payment_token"
-    t.integer "status", default: 0
     t.decimal "plan_price", precision: 6, scale: 2, null: false
     t.decimal "discount_price", precision: 6, scale: 2
+    t.integer "status", default: 0, null: false
     t.index ["payment_method_id"], name: "index_payments_on_payment_method_id"
     t.index ["payment_token"], name: "index_payments_on_payment_token", unique: true
   end
