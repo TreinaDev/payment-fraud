@@ -8,7 +8,7 @@ describe 'payment management' do
                   { payment_method_id: payment_method.id,
                     customer_token: 'a1s2d3f4',
                     cpf: '123.123.123-12',
-                    plan_id: '1', plan_price: '100.00', discount_price: nil  } }
+                    plan_id: '1', plan_price: '100.00', discount_price: nil } }
       payment_before_count = Payment.count
 
       post '/api/v1/payments', params: params
