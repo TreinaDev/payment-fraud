@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 feature 'Admin sign in' do
-  scenario 'successfuly' do 
+  scenario 'successfuly' do
     admin = User.create!(email: 'admin@smartflix.com.br', password: '123456')
 
     visit root_path
-    within('form') do 
+    within('form') do
       fill_in 'E-mail', with: admin.email
       fill_in 'Senha', with: '123456'
       click_on 'Entrar'
     end
   end
-  
+
   scenario 'and logout' do
     admin = User.create!(email: 'admin@smartflix.com.br', password: '123456')
 
