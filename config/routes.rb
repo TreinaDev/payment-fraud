@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#index'
   devise_for :users
 
   namespace 'api', defaults: { format: :json } do
