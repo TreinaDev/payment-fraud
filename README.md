@@ -1,25 +1,71 @@
 ## Sistema de Pagamentos e Fraudes + API
 
+Este sistema é responsável pela gestão de pagamentos e fraudes na plataforma Smartflix. As informações podem ser acessadas por um usuário autenticado com o domínio @smartflix.com.br. Além disso o sistema fornece endpoints via API para que outros sistemas da plataforma possam acessar os dados cadastrados.
 
 ## Features:
 
-
+:heavy_check_mark: Consulta de situação de um CPF
+:heavy_check_mark: Bloqueio de CPF
+:heavy_check_mark: Gestão dos meios de pagamentos
+:heavy_check_mark: Emitir cobranças
+:heavy_check_mark: Gestão de fraudes 
 
 ## Requisitos:
-- Ruby 2.7.2
-- Rails 6.1.3
-- NodeJS
-- Yarn
 
-## Instalando:
-
+- [Ruby 2.7.2](https://www.ruby-lang.org/pt/)
+- [Rails 6.1.3](https://rubyonrails.org/)
+- [NodeJS](https://nodejs.org/en/docs/)
+- [Yarn](https://yarnpkg.com/)
 
 
 ## Dependências (Gems):
-- devise (~> 4.7.3) 
-- FactoryBots Rails (6.1.0)
-- Faraday (1.3.0)
-- CPF_CNPJ (0.5.0)
+
+- [devise (~> 4.7.3) ](https://github.com/heartcombo/devise)
+- [FactoryBots Rails (6.1.0) ](https://github.com/thoughtbot/factory_bot_rails)
+- [Faraday (1.3.0) ](https://github.com/lostisland/faraday)
+- [CPF_CNPJ (0.5.0) ](https://github.com/fnando/cpf_cnpj)
+
+## Como rodar a aplicação :arrow_forward:
+
+No terminal, clone o projeto: 
+
+```
+git clone https://github.com/TreinaDev/payment-fraud
+```
+
+Abra o diretório pelo terminal
+
+```bash
+cd  payment-fraud
+```
+
+Rode o script bin setup para configurar o projeto
+
+```bash
+bin/setup
+```
+
+Para inicializar o servidor:
+
+```bash
+rails s
+```
+
+A aplicação estará disponível na porta: *http://localhost:5000*
+
+## Configurando o banco de dados
+
+Para popular o projeto, utilize o comando:
+```
+$ rails db:seed 
+```
+
+Teste a aplicação com o Usuário: 
+
+|name|email|password|
+| -------- |-------- |-------- |
+|Roberto|roberto@smartflix.com.br|123456|
+
 
 ## Rotas da API 
 
@@ -84,9 +130,10 @@ Sucesso:
   "cpf": "12312312312",
   "customer_token": "a1s2d3f4",
   "payment_token": "SC1t7ikkwreA1Fq9Xwcswnz1",
-  "payment_method": "CRT CREDIT"
-} 
-
+  "payment_method": "CRT CREDIT",
+  "plan_price": "100.0",
+  "discount_price": "90.0"
+}
 ```
 
 Erros:
@@ -99,10 +146,9 @@ Erros:
 }
 ```
 
-
 ### ``POST /api/v1/payments``
 
-Parâmetros(todos obrigatórios:): 
+Parâmetros (todos obrigatórios, exceto ``:discount_price`` ): 
 
 ```javascript
 {
@@ -111,8 +157,10 @@ Parâmetros(todos obrigatórios:):
       payment_method_id: 1,
       customer_token: 'a1s2d3f4',
       cpf: '12312312312',
-      plan_id: '1' 
-    } 
+      plan_id: '1',
+      plan_price: 100.00,
+      discount_price: 90.00 // opcional
+    }
 }
 ```
 
@@ -130,7 +178,9 @@ Sucesso:
   "created_at": "2021-03-25T21:11:37.891-03:00",
   "updated_at": "2021-03-25T21:11:37.891-03:00",
   "payment_token": "SC1t7ikkwreA1Fq9Xwcswnz1",
-  "status": "pending"
+  "status": "pending",
+  "plan_price": 100.00,
+  "discount_price": 90.00
 } 
 ```
 
@@ -178,3 +228,14 @@ Sucesso:
   }
 ]
 ```
+
+## Desenvolvedores
+
+- https://github.com/crisaito
+- https://github.com/chrisleo-usa
+- https://github.com/le-santos
+- https://github.com/mauroroc
+- https://github.com/juniorivn
+- https://github.com/RCOliveira98
+- https://github.com/joaorsalmeida
+- https://github.com/HenriqueMorato
