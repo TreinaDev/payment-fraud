@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_135056) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "payment_token"
+    t.decimal "plan_price", precision: 6, scale: 2, null: false
+    t.decimal "discount_price", precision: 6, scale: 2
     t.integer "status", default: 0, null: false
     t.index ["payment_method_id"], name: "index_payments_on_payment_method_id"
     t.index ["payment_token"], name: "index_payments_on_payment_token", unique: true
