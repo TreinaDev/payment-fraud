@@ -13,7 +13,7 @@ feature 'Admin sign in' do
   end
 
   scenario 'and logout' do
-    admin = admin = FactoryBot.create(:user)
+    admin = FactoryBot.create(:user)
 
     visit root_path
     within('form') do
