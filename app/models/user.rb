@@ -11,8 +11,9 @@ class User < ApplicationRecord
   private
 
   def create_email
-    email_aux = email
-    email_aux = email_aux.split('@')
+    return if email.blank?
+
+    email_aux = email.split('@')
     return unless email_aux.last != 'smartflix.com.br'
 
     errors.add(:email, '. Cadastro permitido somente para colaborador Smartflix')
