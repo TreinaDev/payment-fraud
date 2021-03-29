@@ -21,5 +21,13 @@ RSpec.describe FraudEvent, type: :model do
 
       expect(NegativeList.blocked?('12345678900')).to be_falsy
     end
+
+    it 'should block for 12 months' do
+      FactoryBot.create(:fraud_event, { cpf: '12345678900', event_severity: 1 })
+      blocked_cpf = NegativeList.find_by(cpf: '12345678900')
+
+      expect(NegativeList.blocked?('12345678900')).to be_truthy
+      expect(blocked_cpf.expiration_date.to_s).to eq((Time.zone.today + 1.year).to_s)
+    end
   end
 end
