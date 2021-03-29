@@ -9,7 +9,7 @@ RSpec.describe FraudEvent, type: :model do
     end
 
     it 'with 3 low severity fraud events' do
-      3.times do 
+      3.times do
         FactoryBot.create(:fraud_event, { cpf: '12345678900', event_severity: 0 })
       end
 
