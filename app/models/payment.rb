@@ -8,6 +8,7 @@ class Payment < ApplicationRecord
   validates :customer_token, :cpf,
             :plan_id, presence: true
   validates :payment_token, uniqueness: { message: :unique }
+  validates :plan_price, presence: true, numericality: { greater_than: 0 }
 
   def change_status
     return false unless pending?

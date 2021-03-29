@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_061948) do
     t.integer "event_severity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
   end
 
   create_table "negative_lists", force: :cascade do |t|
@@ -71,6 +72,8 @@ ActiveRecord::Schema.define(version: 2021_03_27_061948) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "payment_token"
+    t.decimal "plan_price", precision: 6, scale: 2, null: false
+    t.decimal "discount_price", precision: 6, scale: 2
     t.integer "status", default: 0, null: false
     t.index ["payment_method_id"], name: "index_payments_on_payment_method_id"
     t.index ["payment_token"], name: "index_payments_on_payment_token", unique: true
