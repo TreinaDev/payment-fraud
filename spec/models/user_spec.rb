@@ -1,5 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe User, type: :model do
+  context 'validation' do
+    it 'attributes connet be blank' do
+      user = User.new
+
+      expect(user.valid?).to eq false
+      expect(user.errors.count).to eq 5
+    end
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:password) }
+  end
 end

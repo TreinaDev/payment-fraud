@@ -3,4 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  validates :last_name, :first_name, :create_email, presence: true
+
+  private
+
+  def create_email
+    email_aux = email
+    email_aux = email_aux.split('@')
+    return unless email_aux.last != 'smartflix.com.br'
+
+    errors.add(:email, '. Cadastro permitido somente para colaborador Smartflix')
+  end
 end
