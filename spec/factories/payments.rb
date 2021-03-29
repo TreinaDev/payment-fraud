@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :payment do
-    payment_method { nil }
-    cpf { 'MyString' }
-    customer_token { 'MyString' }
-    plan_id { 'MyString' }
+    payment_method { PaymentMethod.last || association(:payment_method) }
+    sequence(:cpf) { |n| "1234567890#{n}" }
+    sequence(:customer_token) { |n| "a1s2d3#{n}" }
+    plan_id { '1' }
     status { :pending }
-    sequence(:payment_token) { |n| "token-#{n}" }
   end
 end
