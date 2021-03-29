@@ -1,3 +1,6 @@
+# Usuário admin
+user =  User.create!(first_name: 'Bill', last_name: 'Jobs', email: 'bill.jobs@smartflix.com.br', password:'123456') 
+
 # Payment_methods
 FactoryBot.create(:payment_method)
 FactoryBot.create(:payment_method, { name: 'Boleto', 
