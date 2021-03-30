@@ -1,4 +1,5 @@
 class FraudEvent < ApplicationRecord
+  validate :validate_cpf
   after_save :block_cpf, if: :too_many_events?
 
   private
@@ -13,5 +14,11 @@ class FraudEvent < ApplicationRecord
   def block_cpf
     NegativeList.create(cpf: cpf,
                         expiration_date: 1.year.from_now)
+  end
+
+  def validate_cpf
+    return if Cpf.valid?(cpf)
+
+    errors.add :cpf, 'deve ser válido'
   end
 end
