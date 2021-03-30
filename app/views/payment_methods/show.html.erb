@@ -1,0 +1,25 @@
+<h1>Show Payment Method</h1>
+
+<div>
+  <span>Nome:</span>
+  <%= @payment_method.name %>
+</div>
+
+<div>
+  <span>Número máximo de parcelas:</span>
+  <%= @payment_method.max_installments %>
+</div>
+
+<div>
+  <span>Código:</span>
+  <%= @payment_method.code %>
+</div>
+
+<% if @payment_method.active? %>
+  <%= link_to 'Desativar', disable_payment_method_path, method: :post, data: { confirm: "Confirma a operação?" } %>
+<% else %>
+  <%= link_to 'Ativar', activate_payment_method_path, method: :post, data: { confirm: "Confirma a operação?" } %>
+<% end %>
+
+<%= link_to 'Editar', edit_payment_method_path %>
+<%= link_to 'Voltar', payment_methods_path %>

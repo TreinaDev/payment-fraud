@@ -1,0 +1,10 @@
+<h1>Index Payment Methods</h1>
+
+<%= link_to 'Criar Novo Meio de Pagamento', new_payment_method_path %>
+
+<% @payment_methods.each do |pm|%>
+  <div>
+    <%= link_to pm.name, payment_method_path(pm) %>
+    <%= pm.status %>
+  </div>
+<% end %>
