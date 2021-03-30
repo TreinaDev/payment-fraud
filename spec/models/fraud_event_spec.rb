@@ -27,7 +27,7 @@ RSpec.describe FraudEvent, type: :model do
       blocked_cpf = NegativeList.find_by(cpf: '53282085796')
 
       expect(NegativeList.blocked?('53282085796')).to be_truthy
-      expect(blocked_cpf.expiration_date.to_s).to eq((Time.zone.today + 1.year).to_s)
+      expect(blocked_cpf.expiration_date.strftime('%F')).to eq(1.year.from_now.strftime('%F'))
     end
 
     it 'only if cpf is valid' do
