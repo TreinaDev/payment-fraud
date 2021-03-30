@@ -46,6 +46,6 @@ FactoryBot.create(:negative_list, {
 # User
 FactoryBot.create(:user, { email: 'roberto@smartflix.com.br', password: '123456' })
 
-3.times do
-  FactoryBot.create(:user)
-end
+# 3.times do
+#   FactoryBot.create(:user)
+# end
