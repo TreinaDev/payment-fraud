@@ -9,28 +9,28 @@ RSpec.describe Cpf, type: :model do
     end
 
     it 'not blocking with two low occurrence' do
-      FraudEvent.create!(cpf: '12345678900', event_severity: 0, description: 'teste 1')
-      FraudEvent.create!(cpf: '12345678900', event_severity: 0, description: 'teste 2')
+      FraudEvent.create!(cpf: '53282085796', event_severity: 0, description: 'teste 1')
+      FraudEvent.create!(cpf: '53282085796', event_severity: 0, description: 'teste 2')
 
-      result = Cpf.qualify?('12345678900')
+      result = Cpf.qualify?('53282085796')
 
       expect(result).to eq false
     end
 
     it 'blocking with one high occurrence' do
-      FraudEvent.create!(cpf: '12345678900', event_severity: 1, description: 'teste 1')
+      FraudEvent.create!(cpf: '53282085796', event_severity: 1, description: 'teste 1')
 
-      result = Cpf.qualify?('12345678900')
+      result = Cpf.qualify?('53282085796')
 
       expect(result).to eq true
     end
 
     it 'blocking with three low occurrence' do
-      FraudEvent.create!(cpf: '12345678900', event_severity: 0, description: 'teste 1')
-      FraudEvent.create!(cpf: '12345678900', event_severity: 0, description: 'teste 2')
-      FraudEvent.create!(cpf: '12345678900', event_severity: 0, description: 'teste 3')
+      FraudEvent.create!(cpf: '53282085796', event_severity: 0, description: 'teste 1')
+      FraudEvent.create!(cpf: '53282085796', event_severity: 0, description: 'teste 2')
+      FraudEvent.create!(cpf: '53282085796', event_severity: 0, description: 'teste 3')
 
-      result = Cpf.qualify?('12345678900')
+      result = Cpf.qualify?('53282085796')
 
       expect(result).to eq true
     end
