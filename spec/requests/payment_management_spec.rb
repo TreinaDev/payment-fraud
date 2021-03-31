@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'payment management' do
   context 'POST payment' do
     it 'should create a valid payment' do
-      payment_method = create(:payment_method)
+      payment_method = create(:payment_method, status: :active)
       params = { payment:
                   { payment_method_id: payment_method.id,
                     customer_token: 'a1s2d3f4',
@@ -21,7 +21,7 @@ describe 'payment management' do
     end
 
     it 'should return a payment data sucessfully' do
-      payment_method = create(:payment_method)
+      payment_method = create(:payment_method, status: :active)
       params = { payment:
                   { payment_method_id: payment_method.id,
                     customer_token: 'a1s2d3f4',
@@ -35,23 +35,11 @@ describe 'payment management' do
       expect(json_response[:payment_token]).to eq(Payment.last.payment_token)
       expect(json_response[:customer_token]).to eq('a1s2d3f4')
     end
-
-    it 'should return 422 if payment method does not exist' do
-      params = { payment:
-                  { payment_method_id: 3,
-                    customer_token: 'a1s2d3f4',
-                    cpf: '123.123.123-12',
-                    plan_id: '1', plan_price: 100.00 } }
-
-      post '/api/v1/payments', params: params
-
-      expect(response).to have_http_status(:unprocessable_entity)
-    end
   end
 
   context 'GET payment' do
     it 'should render a payment information' do
-      payment_method = create(:payment_method)
+      payment_method = create(:payment_method, status: :active)
       payment = Payment.create!(payment_method_id: payment_method.id,
                                 customer_token: 'a1s2d3f4',
                                 cpf: '123.123.123-12',
@@ -76,7 +64,7 @@ describe 'payment management' do
     end
 
     it 'should get status payment as approved' do
-      payment_method = create(:payment_method)
+      payment_method = create(:payment_method, status: :active)
       payment = create(:payment,
                        cpf: '123.123.123-12',
                        customer_token: 'a1s2d3f4',
@@ -98,7 +86,7 @@ describe 'payment management' do
     end
 
     it 'should get status payment as refused' do
-      payment_method = create(:payment_method)
+      payment_method = create(:payment_method, status: :active)
       payment = create(:payment,
                        cpf: '123.123.123-12',
                        customer_token: 'a1s2d3f4',
