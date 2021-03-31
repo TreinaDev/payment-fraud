@@ -36,15 +36,15 @@ class PaymentMethodsController < ApplicationController
   end
 
   def disable
-    payment_method = PaymentMethod.find(params[:id])
-
-    payment_method.inactive!
+    @payment_method = PaymentMethod.find(params[:id])
+    @payment_method.inactive!
+    render :show
   end
 
   def activate
-    payment_method = PaymentMethod.find(params[:id])
-
-    payment_method.active!
+    @payment_method = PaymentMethod.find(params[:id])
+    @payment_method.active!
+    render :show
   end
 
   private
