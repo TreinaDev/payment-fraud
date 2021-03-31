@@ -7,6 +7,7 @@ describe Payment do
       payment = FactoryBot.build(:payment, payment_method: payment_method, plan_price: 10.5)
 
       expect(payment).not_to be_valid
+      expect(Payment.count).to eq(0)
     end
 
     it 'successfully with all params' do
