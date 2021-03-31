@@ -27,6 +27,10 @@ pt-BR:
         updated_at: Atualizado em
         first_name: Primeiro nome
         last_name: Último nome
+      fraud_event:
+        cpf: CPF
+        description: Descrição
+        event_severity: Nível de criticidade
     errors:
       models:
         payment:

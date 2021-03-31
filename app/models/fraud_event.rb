@@ -1,5 +1,6 @@
 class FraudEvent < ApplicationRecord
   validate :validate_cpf
+  validates :description, :event_severity, :cpf, presence: true
   after_save :block_cpf, if: :too_many_events?
 
   private
