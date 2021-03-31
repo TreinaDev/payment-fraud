@@ -19,5 +19,6 @@ class Payment < ApplicationRecord
     else
       approved!
     end
+    #TODO puxar criação do recibo
   end
 end
