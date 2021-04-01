@@ -1,4 +1,6 @@
 class FraudEvent < ApplicationRecord
+  enum event_severity: { low: 0, high: 1 }
+
   validate :validate_cpf
   validates :description, :event_severity, :cpf, presence: true
   after_save :block_cpf, if: :too_many_events?
