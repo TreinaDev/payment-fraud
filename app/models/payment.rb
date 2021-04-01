@@ -1,5 +1,6 @@
 class Payment < ApplicationRecord
   belongs_to :payment_method
+  has_one :receipt, dependent: :delete
 
   has_secure_token :payment_token
 
@@ -19,10 +20,12 @@ class Payment < ApplicationRecord
     else
       approved!
     end
-    # TODO: puxar criacao do recibo
+    generate_receipt
   end
 
   def generate_receipt
-    Receipt.create!
+    Receipt.create!(token_receipt: (rand 1_000_000_000..9_999_999_999).to_s,
+                    number_installment: 1,
+                    payment_id: id)
   end
 end

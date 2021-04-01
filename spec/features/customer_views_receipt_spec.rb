@@ -2,11 +2,6 @@ require 'rails_helper'
 
 feature 'customer views receipt' do
   scenario 'successfully' do
-    plans_json = File.read(Rails.root.join('spec/support/apis/plans.json'))
-    plans_double = double('faraday_response', status: 200, body: plans_json)
-    allow(Faraday).to receive(:get).with('http://localhost:4000/api/v1/plans')
-                                   .and_return(plans_double)
-
     create(:payment_method, name: 'Pix')
     payment = create(:payment, plan_price: '100.0', status: 'approved')
     receipt = Receipt.create!(token_receipt: '123456789', number_installment: 1,

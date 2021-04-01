@@ -19,11 +19,12 @@ describe Receipt do
     end
 
     it 'token_receipt must be uniq' do
-      payment = create(:payment, plan_price: '100.0', status: 'approved')
+      payment = create(:payment)
+      payment2 = create(:payment)
       Receipt.create!(token_receipt: '123456789', number_installment: 1,
                       payment_id: payment.id)
       receipt = Receipt.new(token_receipt: '123456789', number_installment: 10,
-                            payment_id: payment.id)
+                            payment_id: payment2.id)
 
       expect(receipt.valid?).to eq false
       expect(receipt.errors[:token_receipt]).to include('já está em uso')

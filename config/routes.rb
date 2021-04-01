@@ -11,5 +11,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :receipts, only: %i[ show ]
+  resources :receipts, only: %i[ show ], param: :token
 end
