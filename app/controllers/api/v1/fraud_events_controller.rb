@@ -16,6 +16,7 @@ module Api
       end
 
       private
+
       def event_fraud_params
         params.require(:fraud_event).permit(:cpf, :description, :event_severity)
       end
