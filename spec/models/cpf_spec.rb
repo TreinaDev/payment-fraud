@@ -18,7 +18,7 @@ RSpec.describe Cpf, type: :model do
     end
 
     it 'blocking with one high occurrence' do
-      FraudEvent.create!(cpf: '53282085796', event_severity: 1, description: 'teste 1')
+      FraudEvent.create!(cpf: '53282085796', event_severity: :high, description: 'teste 1')
 
       result = Cpf.qualify?('53282085796')
 
