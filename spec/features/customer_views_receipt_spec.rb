@@ -5,11 +5,11 @@ feature 'customer views receipt' do
     plans_json = File.read(Rails.root.join('spec/support/apis/plans.json'))
     plans_double = double('faraday_response', status: 200, body: plans_json)
     allow(Faraday).to receive(:get).with('http://localhost:4000/api/v1/plans')
-                  .and_return(plans_double)
+                                   .and_return(plans_double)
 
-    payment_method = create(:payment_method, name: 'Pix')
+    create(:payment_method, name: 'Pix')
     payment = create(:payment, plan_price: '100.0', status: 'approved')
-    receipt = Receipt.create!(token_receipt: '123456789', number_installment: 1, 
+    receipt = Receipt.create!(token_receipt: '123456789', number_installment: 1,
                               payment_id: payment.id, created_at: '2021-03-30 02:00:14 -0300')
 
     visit receipt_path(receipt.id)
@@ -21,7 +21,6 @@ feature 'customer views receipt' do
     expect(page).to have_content('Plano Smart')
     expect(page).to have_content('Valor R$ 100,00')
     expect(page).to have_content('Status do pagamento aprovado')
-    #expect(page).to have_content('Total de parcelas do plano: 5')
-
+    # expect(page).to have_content('Total de parcelas do plano: 5')
   end
 end

@@ -19,9 +19,9 @@ class Payment < ApplicationRecord
     else
       approved!
     end
-    #TODO puxar criação do recibo
+    # TODO: puxar criacao do recibo
   end
-  
+
   def generate_receipt
     Receipt.create!
   end

@@ -3,8 +3,8 @@ require 'rails_helper'
 describe Receipt do
   context 'create' do
     it 'successfully when payment change status' do
-      payment_method = FactoryBot.create(:payment_method, status: 'active')
-      payment = FactoryBot.create(:payment, payment_method: payment_method)
+      payment_method = create(:payment_method, status: 'active')
+      payment = create(:payment, payment_method: payment_method)
 
       payment.change_status
 
@@ -19,11 +19,10 @@ describe Receipt do
     end
 
     it 'token_receipt must be uniq' do
-      payment_method = create(:payment_method, name: 'Pix')
       payment = create(:payment, plan_price: '100.0', status: 'approved')
-      Receipt.create!(token_receipt: '123456789', number_installment: 1, 
+      Receipt.create!(token_receipt: '123456789', number_installment: 1,
                       payment_id: payment.id)
-      receipt = Receipt.new(token_receipt: '123456789', number_installment: 10, 
+      receipt = Receipt.new(token_receipt: '123456789', number_installment: 10,
                             payment_id: payment.id)
 
       expect(receipt.valid?).to eq false
