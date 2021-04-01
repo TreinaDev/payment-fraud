@@ -2,14 +2,27 @@
 user =  User.create!(first_name: 'Bill', last_name: 'Jobs', email: 'bill.jobs@smartflix.com.br', password:'123456') 
 
 # Payment_methods
-FactoryBot.create(:payment_method)
-FactoryBot.create(:payment_method, { name: 'Boleto', 
-                                      code: 'BOLET', 
-                                      max_installments: 1 })
+ccard_pm = FactoryBot.create(:payment_method, status: :active)
+ccard_pm.icon.attach(
+  io: File.open(Rails.root.join('spec/support/storage/mastercard_icon.svg')),
+  filename: 'mastercard_icon.svg'
+)
 
-FactoryBot.create(:payment_method, { name: 'Pix',
-                                      code: 'PIX',
-                                      max_installments: 1 })
+ticket_pm = FactoryBot.create(:payment_method, name: 'Boleto', 
+                              code: 'BOLET', 
+                              max_installments: 1, status: :active)
+ticket_pm.icon.attach(
+  io: File.open(Rails.root.join('spec/support/storage/boleto.svg')),
+  filename: 'boleto.svg'
+)
+
+pix_pm = FactoryBot.create(:payment_method, name: 'Pix',
+                           code: 'PIX',
+                           max_installments: 1, status: :active)
+pix_pm.icon.attach(
+  io: File.open(Rails.root.join('spec/support/storage/pix.svg')),
+  filename: 'pix.svg'
+)
 
 
 # Payment
