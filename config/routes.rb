@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
 
   resources :payment_methods, only: %i[index new create show edit update] do
       post 'disable', on: :member
