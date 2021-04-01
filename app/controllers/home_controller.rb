@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  def index
-    @user = nil
-  end
+  before_action :authenticate_user!, only: [:index]
+
+  def index; end
 end

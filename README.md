@@ -5,9 +5,13 @@ Este sistema é responsável pela gestão de pagamentos e fraudes na plataforma 
 ## Features:
 
 :heavy_check_mark: Consulta de situação de um CPF
+
 :heavy_check_mark: Bloqueio de CPF
+
 :heavy_check_mark: Gestão dos meios de pagamentos
+
 :heavy_check_mark: Emitir cobranças
+
 :heavy_check_mark: Gestão de fraudes 
 
 ## Requisitos:

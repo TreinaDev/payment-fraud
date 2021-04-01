@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   devise_for :users
   root 'home#index'
 
@@ -6,6 +7,11 @@ Rails.application.routes.draw do
       post 'disable', on: :member
       post 'activate', on: :member
   end
+=======
+  root 'home#index'
+
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+>>>>>>> 8ae71212b39f8e288e2728aefb18035d412a6683
 
   namespace 'api', defaults: { format: :json } do
     namespace 'v1' do
