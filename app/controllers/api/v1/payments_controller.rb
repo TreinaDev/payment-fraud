@@ -27,6 +27,13 @@ module Api
                             .merge({ 'payment_method' => payment.payment_method.code })
       end
 
+      # GET /api/v1/payments/customer_payments/:customer_token
+      def list_payments
+        payments = Payment.where(customer_token: params[:customer_token])
+
+        render json: payments.as_json
+      end
+
       private
 
       def payment_params

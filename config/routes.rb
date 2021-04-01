@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :payment_methods, only: [:index]
       resources :cpfs, only: [:show], param: :cpf
       resources :payments, only: %i[ show create update ], param: :token
+
+      get '/payments/customer_payments/:customer_token', to: 'payments#list_payments', as: 'customer_payments'
     end
   end
 end

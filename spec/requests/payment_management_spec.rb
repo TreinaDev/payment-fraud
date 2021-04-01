@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'cpf_cnpj'
 
 describe 'payment management' do
   context 'POST payment' do
@@ -105,6 +106,32 @@ describe 'payment management' do
       expect(json_response[:status]).to eq('refused')
       expect(json_response[:payment_method]).to eq(payment_method.code)
       expect(json_response[:payment_token]).to be_kind_of(String)
+    end
+  end
+
+  context 'GET customer payments' do
+    it 'returns a list of payments by customer' do
+      cpf = CPF.generate
+      customer_token = 'a1s2d3f4'
+      payment_method = create(:payment_method, status: :active)
+      payment1 = create(:payment,
+                        cpf: cpf, customer_token: customer_token,
+                        payment_method: payment_method,
+                        status: :pending, plan_price: 100.00,
+                        plan_id: '1')
+      payment2 = create(:payment,
+                        cpf: cpf, customer_token: customer_token,
+                        payment_method: payment_method,
+                        status: :approved, plan_price: 50.00,
+                        plan_id: '1')
+
+      get "/api/v1/payments/customer_payments/#{customer_token}"
+      json_response = JSON.parse(response.body)
+
+      expect(response).to have_http_status(200)
+      expect(json_response.length).to eq(2)
+      expect(json_response[0].values).to include(customer_token, cpf, payment1[:status])
+      expect(json_response[1].values).to include(customer_token, cpf, payment2[:status])
     end
   end
 end
