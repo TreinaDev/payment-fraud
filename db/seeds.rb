@@ -1,10 +1,6 @@
-# User admin
+# User
 FactoryBot.create(:user, { first_name: 'Bill', last_name: 'Jobs', email: 'bill.jobs@smartflix.com.br', password:'123456'}) 
 FactoryBot.create(:user, { first_name: 'Roberto', last_name: 'Silva', email: 'roberto@smartflix.com.br', password: '123456'})
-
-# 3.times do
-#   FactoryBot.create(:user)
-# end
 
 # Payment_methods
 FactoryBot.create(:payment_method)
@@ -17,7 +13,6 @@ FactoryBot.create(:payment_method, { name: 'Pix',
                                       code: 'PIX',
                                       max_installments: 1,
                                       status: 'active' })
-
 
 # Payment
 FactoryBot.create(:payment)

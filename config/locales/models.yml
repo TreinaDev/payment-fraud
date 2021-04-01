@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      payment:
+        one: pagamento
+        other: pagamentos
+    attributes:
+      payment/status:
+        pending: pendente
+        approved: aprovado
+        refused: recusado

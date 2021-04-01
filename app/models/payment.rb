@@ -21,4 +21,8 @@ class Payment < ApplicationRecord
     end
     #TODO puxar criação do recibo
   end
+  
+  def generate_receipt
+    Receipt.create!
+  end
 end

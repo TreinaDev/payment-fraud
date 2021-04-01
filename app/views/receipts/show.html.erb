@@ -1,27 +1,31 @@
-<table>
+<table class="table table-striped col-6">
   <tr>
-    <th>Data: </th>
-    <td><%= @receipt.created_at %></td>
-  </tr>
-  <tr>
-    <th>Número: </th>
+    <th>Número do recibo </th>
     <td><%= @receipt.token_receipt %></td>
   </tr>
   <tr>
-    <th>Forma de pagamento: </th>
+    <th>Data </th>
+    <td><%= @receipt.created_at.strftime("%d/%m/%Y") %></td>
+  </tr>
+  <tr>
+    <th>Forma de pagamento </th>
     <td><%= @receipt.payment.payment_method.name %></td>
   </tr>
   <tr>
-    <th>Parcela: </th>
+    <th>Parcela </th>
     <td><%= @receipt.number_installment %></td>
   </tr>
   <tr>
-    <th>Plano: </th>
-    <td><%= @receipt.payment.plan_id %></td>
+    <th>Plano contratado </th>
+    <td><%= @plan.name %></td>
   </tr>
   <tr>
-    <th>Valor: </th>
-    <td><%= @receipt.payment.plan_price %></td>
+    <th>Valor </th>
+    <td><%= number_to_currency(@receipt.payment.plan_price, delimiter: '.')%></td>
+  </tr>
+  <tr>
+    <th>Status do pagamento </th>
+    <td><%= Payment.human_attribute_name("status.#{@receipt.payment.status}")  %></td>
   </tr>
 
   </tr>
