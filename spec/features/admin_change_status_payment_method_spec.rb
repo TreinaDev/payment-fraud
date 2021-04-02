@@ -1,8 +1,13 @@
 require 'rails_helper'
 
 feature 'Admin change payment method status' do
-  xscenario 'must be signed in' do
+  scenario 'must be signed in' do
+    admin = FactoryBot.create(:user)
+
+    login_as admin
     visit root_path
+
+    expect(page).to have_content("Olá #{admin.first_name}")
   end
 
   scenario 'Active status' do

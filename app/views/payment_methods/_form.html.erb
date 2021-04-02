@@ -18,6 +18,10 @@
       <div class="col-3 font-weight-bold"><%= f.label :code, 'Código' %></div>
       <div class="col-3"><%= f.text_field :code, class: "form-control" %></div>
     </div> 
+    <div class="row mb-2">
+        <div class="col-3 font-weight-bold"><%= f.label :icon, 'Icone'  %></div>
+        <div class="col-3"><%= f.file_field :icon %></div>
+    </div>
     <div class="row mb-2"><%= f.submit 'Salvar', :class => "btn btn-success" %></div>  
   <% end %>
 </div> 

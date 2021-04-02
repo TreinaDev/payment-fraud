@@ -16,6 +16,16 @@
 </div>
 <div class="container">
   <div class="row mb-2">
+    <div class="col-3 font-weight-bold">Icone:</div>
+    <div class="col-9">
+      <%if @payment_method.icon.attached? %>
+        <%= image_tag(@payment_method.icon, alt: @payment_method.name, :size => "200x200") %>
+      <%else%>
+        Icone não cadastrado
+      <%end%>
+    </div>
+  </div>
+  <div class="row mb-2">
     <div class="col-3 font-weight-bold">Número máximo de parcelas:</div>
     <div class="col-9"><%= @payment_method.max_installments %></div>
   </div>

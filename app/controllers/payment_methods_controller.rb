@@ -50,6 +50,6 @@ class PaymentMethodsController < ApplicationController
   private
 
   def payment_method_params
-    params.require(:payment_method).permit(:name, :max_installments, :code)
+    params.require(:payment_method).permit(:name, :icon, :max_installments, :code)
   end
 end
