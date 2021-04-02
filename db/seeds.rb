@@ -1,7 +1,10 @@
 # gem
 require 'cpf_cnpj'
 # Usuário admin
-user =  User.create!(first_name: 'Bill', last_name: 'Jobs', email: 'bill.jobs@smartflix.com.br', password:'123456') 
+User.create!(first_name: 'Bill',
+              last_name: 'Jobs',
+              email: 'bill.jobs@smartflix.com.br', 
+              password:'123456') 
 
 # Payment_methods
 FactoryBot.create(:payment_method, { status: :active })
@@ -48,8 +51,6 @@ FactoryBot.create(:negative_list, {
 })
 
 # User
-FactoryBot.create(:user, { email: 'roberto@smartflix.com.br', password: '123456' })
-
 3.times do
   FactoryBot.create(:user)
 end

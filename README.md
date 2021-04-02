@@ -68,7 +68,7 @@ Teste a aplicação com o Usuário:
 
 |name|email|password|
 | -------- |-------- |-------- |
-|Roberto|roberto@smartflix.com.br|123456|
+|Bill|bill.jobs@smartflix.com.br|123456|
 
 
 ## Rotas da API 
@@ -79,40 +79,39 @@ Teste a aplicação com o Usuário:
 | Cobrança | Consulta dados de determinada cobrança através do :token único | GET | /api/v1/payments/:token  |
 | Cobrança | Cria nova cobrança | POST | /api/v1/payments |
 | Meios de pagamento | Retorna lista dos meios de pagamentos ativos | GET | /api/v1/payment_methods |
-
-
+| Fraude | Recebe informações de fraude envolvendo um determinado CPF | POST | /api/v1/fraud_events |
 
 ## CPF
 
 ### ``GET /api/v1/cpfs/:cpf``
 
-Parâmetros: 
+#### Parâmetros: 
 
 ``:cpf  (obrigatório)``
 
-Sucesso:
+##### Sucesso:
 
 ``status:  200``
 
-```javascript
+```json
 // CPF bloqueado
 {
-  blocked: true 
+  "blocked": true 
 }
 
 // CPF aprovado
 {
-  blocked: false 
+  "blocked": false 
 }
 ```
 
-Erros:
+##### Erros:
 
 ``status:  400``
 
-```javascript
+```json
 {
-  error_message: 'CPF inválido' 
+  "error_message": 'CPF inválido' 
 }
 ```
 
@@ -120,11 +119,11 @@ Erros:
 
 ### ``GET /api/v1/payments/:token``
 
-Parâmetros: 
+#### Parâmetros: 
 
 ``:token  (obrigatório token único da cobrança)``
 
-Sucesso:
+##### Sucesso:
 
 ``status:  200``
 
@@ -140,7 +139,7 @@ Sucesso:
 }
 ```
 
-Erros:
+##### Erros:
 
 ``status:  404``
 
@@ -152,25 +151,25 @@ Erros:
 
 ### ``POST /api/v1/payments``
 
-Parâmetros (todos obrigatórios, exceto ``:discount_price`` ): 
+#### Parâmetros (todos obrigatórios, exceto ``:discount_price`` ): 
 
-```javascript
+```json
 {
-  payment:
+  "payment":
     { 
-      payment_method_id: 1,
-      customer_token: 'a1s2d3f4',
-      cpf: '12312312312',
-      plan_id: '1',
-      plan_price: 100.00,
-      discount_price: 90.00 // opcional
+      "payment_method_id": 1,
+      "customer_token": 'a1s2d3f4',
+      "cpf": '12312312312',
+      "plan_id": '1',
+      "plan_price": 100.00,
+      "discount_price": 90.00 // opcional
     }
 }
 ```
 
-Sucesso:
+##### Sucesso:
 
-``status:  200``
+``status:  201``
 
 ```JSON
 {
@@ -188,9 +187,9 @@ Sucesso:
 } 
 ```
 
-Erros:
+##### Erros:
 
-``status:  404``
+``status:  422``
 
 ```JSON
 {
@@ -206,7 +205,7 @@ Erros:
 ### ``GET /api/v1/payment_methods``
 
 
-Sucesso:
+##### Sucesso:
 
 ``status:  200``
 
@@ -232,6 +231,82 @@ Sucesso:
   }
 ]
 ```
+
+## Fraude
+
+### ``POST /api/v1/fraud_events``
+
+#### Parâmetros (todos são obrigatórios)
+
+- cpf: string
+
+- description: string
+
+- event_severity: string ou number
+
+  Valor aceito para **event_severity** pode ser uma string ou número de acordo com a tabela abaixo:
+
+  | Chave  | Valor |
+  | ------ | ----- |
+  | "low"  | 0     |
+  | "high" | 10    |
+
+  
+
+```json
+{
+  "fraud_event":
+    { 
+      "cpf": "45113083577",
+      "description": "Descrição de teste",
+      "event_severity": "low"
+    }
+}
+```
+
+
+##### Sucesso:
+
+``status:  201``
+
+```json
+{
+    "id": 5,
+    "cpf": "45113083577",
+    "event_severity": "low",
+    "description": "Descrição de teste"
+}
+```
+
+##### Erros
+
+###### CPF inválido
+
+```status: 422```
+
+```json
+{
+    "error_message": [
+        "CPF deve ser válido"
+    ]
+}
+```
+
+###### Atributo ausente 
+
+* Nesse exemplo o atributo ```description``` não foi enviado
+
+```status: 422```
+
+```json
+{
+    "error_message": [
+        "Descrição não pode ficar em branco"
+    ]
+}
+```
+
+
 
 ## Desenvolvedores
 
