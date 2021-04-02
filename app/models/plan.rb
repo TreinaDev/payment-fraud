@@ -3,9 +3,11 @@ class Plan
 
   def self.all
     # response = Faraday.get("#{Rails.configuration.external_apis['plan_api']}/plans")
+    # return [] if response.status == :not_found
+
     # json_response = JSON.parse(response.body, symbolize_names: true)
 
-    # ##APAGAR (SO TEST)
+    # APAGAR (SO TEST)
     file = open('./spec/support/apis/plans.json')
     json = file.read
     json_response = JSON.parse(json, symbolize_names: true)

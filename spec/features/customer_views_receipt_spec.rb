@@ -3,7 +3,9 @@ require 'rails_helper'
 feature 'customer views receipt' do
   scenario 'successfully' do
     create(:payment_method, name: 'Pix')
-    payment = create(:payment, plan_price: '100.0', status: 'approved')
+    smart = Plan.new(name: 'Plano Smart')
+    allow(Plan).to receive(:all).and_return([smart])
+    payment = create(:payment, plan_id: 1, plan_price: '100.0', status: 'approved')
     receipt = Receipt.create!(token_receipt: '123456789', number_installment: 1,
                               payment_id: payment.id, created_at: '2021-03-30 02:00:14 -0300')
 
