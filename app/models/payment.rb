@@ -12,18 +12,19 @@ class Payment < ApplicationRecord
   validates :plan_price, presence: true, numericality: { greater_than: 0 }
 
   def change_status
-    # return false unless pending?
+    return false unless pending?
 
-    # success_rate = Random.rand
-    # if success_rate <= 0.2
-    #   refused!
-    # else
-    #   approved!
-    # end
+    success_rate = Random.rand
+    if success_rate <= 0.2
+      refused!
+    else
+      approved!
+    end
     generate_receipt
   end
 
   def generate_receipt
-    Receipt.create!(number_installment: 1, payment_id: id)
+    token = Receipt.valid_token
+    Receipt.create!(token_receipt: token, number_installment: 1, payment_id: id)
   end
 end

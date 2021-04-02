@@ -1,15 +1,6 @@
 require 'rails_helper'
 
 describe Plan do
-  context 'PORO' do
-    it 'should initialize a plan' do
-      plan = Plan.new(name: 'Plano Básico')
-
-      expect(Plan.all.size).to eq(1)
-      expecct(plan.name).to eq('Plano Básico')
-    end
-  end
-
   context 'fetch API data' do
     it 'should get all plans from enrollment' do
       plans_json = File.read(Rails.root.join('spec/support/apis/plans.json'))
