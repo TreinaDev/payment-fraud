@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :fraud_event do
-    cpf { 'MyString' }
+    cpf { '53282085796' }
     event_severity { 1 }
+    description { 'Fraud Event' }
   end
 end

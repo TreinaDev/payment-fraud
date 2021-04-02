@@ -10,6 +10,7 @@ class Payment < ApplicationRecord
             :plan_id, presence: true
   validates :payment_token, uniqueness: { message: :unique }
   validates :plan_price, presence: true, numericality: { greater_than: 0 }
+  validate :payment_method_status?, on: :create
 
   def change_status
     return false unless pending?
@@ -26,5 +27,11 @@ class Payment < ApplicationRecord
   def generate_receipt
     token = Receipt.valid_token
     Receipt.create!(token_receipt: token, number_installment: 1, payment_id: id)
+  end
+
+  def payment_method_status?
+    return unless payment_method.inactive?
+
+    errors.add(:payment, 'O meio de pagamento não pode estar inativo')
   end
 end
