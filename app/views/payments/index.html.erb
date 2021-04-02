@@ -1,0 +1,25 @@
+<div class="container d-flex j-content-between mb-2">
+  <div class="col-sm-6">
+    <h2>Listar Pagamentos</h2>
+  </div>  
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">CPF</th>
+        <th scope="col">Customer Token</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payments.each do |p|%>
+        <tr>
+          <td><%= link_to p.cpf, payment_path(p) %></td>
+          <td><%= p.customer_token %></td>
+          <td><%= p.status %></td>          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
+</div>

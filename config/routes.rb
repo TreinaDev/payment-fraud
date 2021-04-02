@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post 'activate', on: :member
   end
 
+  resources :payments, only: %i[index show]
 
   namespace 'api', defaults: { format: :json } do
     namespace 'v1' do

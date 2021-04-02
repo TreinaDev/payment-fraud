@@ -3,7 +3,6 @@ require 'rails_helper'
 feature 'Admin create a payment method' do
   scenario 'must be signed in' do
     admin = FactoryBot.create(:user)
-
     login_as admin
     visit root_path
 
@@ -11,6 +10,9 @@ feature 'Admin create a payment method' do
   end
 
   scenario 'succesfully' do
+    admin = FactoryBot.create(:user)
+    login_as admin
+
     visit root_path
     click_on 'Gerenciar Meio de Pagamento'
     click_on 'Criar Novo Meio de Pagamento'
@@ -28,6 +30,9 @@ feature 'Admin create a payment method' do
   end
 
   scenario 'fields can not be blank' do
+    admin = FactoryBot.create(:user)
+    login_as admin
+
     visit root_path
     click_on 'Gerenciar Meio de Pagamento'
     click_on 'Criar Novo Meio de Pagamento'
