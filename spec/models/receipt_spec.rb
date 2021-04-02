@@ -19,8 +19,9 @@ describe Receipt do
     end
 
     it 'token_receipt must be uniq' do
-      payment = create(:payment)
-      payment2 = create(:payment)
+      payment_method = create(:payment_method, status: 'active')
+      payment = create(:payment, payment_method: payment_method)
+      payment2 = create(:payment, payment_method: payment_method)
       Receipt.create!(token_receipt: '123456789', number_installment: 1,
                       payment_id: payment.id)
       receipt = Receipt.new(token_receipt: '123456789', number_installment: 10,

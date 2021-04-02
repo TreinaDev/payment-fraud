@@ -14,6 +14,8 @@ Este sistema é responsável pela gestão de pagamentos e fraudes na plataforma 
 
 :heavy_check_mark: Gestão de fraudes 
 
+:heavy_check_mark: Emissão de recibos 
+
 ## Requisitos:
 
 - [Ruby 2.7.2](https://www.ruby-lang.org/pt/)

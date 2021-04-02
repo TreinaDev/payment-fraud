@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'customer views receipt' do
   scenario 'successfully' do
-    create(:payment_method, name: 'Pix')
+    create(:payment_method, name: 'Pix', status: 'active')
     smart = Plan.new(name: 'Plano Smart')
     allow(Plan).to receive(:all).and_return([smart])
     payment = create(:payment, plan_id: 1, plan_price: '100.0', status: 'approved')
@@ -22,7 +22,7 @@ feature 'customer views receipt' do
   end
 
   it 'with error if receipt doesnt exist' do
-    create(:payment_method)
+    create(:payment_method, status: 'active')
     Plan.new(name: 'Plano Smart')
     allow(Plan).to receive(:all).and_return([])
     payment = create(:payment, status: 'approved')
