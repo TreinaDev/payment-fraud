@@ -31,7 +31,7 @@ module Api
       def list_payments
         payments = Payment.where(customer_token: params[:customer_token])
 
-        render json: payments.as_json
+        render json: payments.as_json(except: %i[created_at updated_at])
       end
 
       private

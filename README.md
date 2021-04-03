@@ -78,6 +78,7 @@ Teste a aplicação com o Usuário:
 | CPF | Retorna situação de um CPF | GET | /api/v1/cpfs/:cpf |
 | Cobrança | Consulta dados de determinada cobrança através do :token único | GET | /api/v1/payments/:token  |
 | Cobrança | Cria nova cobrança | POST | /api/v1/payments |
+| Cobrança | Acessa lista de cobranças de um cliente através do customer_token | GET | /api/v1/payments/customer_payments/:customer_token |
 | Meios de pagamento | Retorna lista dos meios de pagamentos ativos | GET | /api/v1/payment_methods |
 
 

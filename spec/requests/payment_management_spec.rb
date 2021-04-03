@@ -128,10 +128,20 @@ describe 'payment management' do
       get "/api/v1/payments/customer_payments/#{customer_token}"
       json_response = JSON.parse(response.body)
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(json_response.length).to eq(2)
       expect(json_response[0].values).to include(customer_token, cpf, payment1[:status])
       expect(json_response[1].values).to include(customer_token, cpf, payment2[:status])
+    end
+
+    it 'returns empty array if there is no payment' do
+      customer_token = 'a1s2d3f4'
+
+      get "/api/v1/payments/customer_payments/#{customer_token}"
+      json_response = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:ok)
+      expect(json_response.empty?).to be_truthy
     end
   end
 end
