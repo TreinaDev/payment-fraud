@@ -14,3 +14,20 @@
  *= require_tree .
  *= require_self
  */
+
+
+.navbar-brand {
+  width: 300px;
+}
+
+.navbar-brand img {
+  width: 100%;
+}
+
+.navbar-brand.brand2 {
+  width: 50px;
+}
+
+.brand2 img {
+  width: 100%;
+}
