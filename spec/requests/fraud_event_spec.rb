@@ -5,7 +5,7 @@ describe 'Fraud event' do
   context 'POST' do
     it 'new fraud event' do
       cpf = CPF.generate
-      params = { fraud_event: { cpf: cpf, description: 'descrição de teste', event_severity: :low } }
+      params = { fraud_event: { cpf: cpf, description: 'descrição de teste', event_severity: 'low' } }
 
       post '/api/v1/fraud_events', params: params
 
@@ -17,7 +17,7 @@ describe 'Fraud event' do
     end
 
     it 'fail if invalid cpf' do
-      params = { fraud_event: { cpf: '11111111111', description: 'descrição de teste', event_severity: :low } }
+      params = { fraud_event: { cpf: '11111111111', description: 'descrição de teste', event_severity: 'low' } }
 
       post '/api/v1/fraud_events', params: params
 
