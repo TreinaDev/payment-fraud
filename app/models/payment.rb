@@ -1,4 +1,5 @@
 class Payment < ApplicationRecord
+  # TODO: Validar Payment Method status active para criar payment (tentar before_save)
   belongs_to :payment_method
   has_one :receipt, dependent: :delete
 

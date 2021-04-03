@@ -1,0 +1,29 @@
+<div class="container d-flex j-content-between mb-2">
+  <div class="col-sm-6">
+    <h2>Listar Meio de Pagamento</h2>
+  </div>
+  <div class="col-sm-6 text-right">
+    <%= link_to 'Criar Novo Meio de Pagamento', new_payment_method_path,:class => "btn btn-warning" %>
+  </div>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Código</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payment_methods.each do |pm|%>
+        <tr>
+          <td><%= link_to pm.name, payment_method_path(pm) %></td>
+          <td><%= pm.code %></td>
+          <td><%= pm.status %></td>          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
+</div>
+
