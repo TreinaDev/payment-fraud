@@ -215,20 +215,28 @@ Sucesso:
   { 
     "id": 1, 
     "name": "Cartão de crédito", 
-    "created_at": "2021-03-25 20:47:39.461725000 -0300", 
-    "updated_at": "2021-03-25 20:47:39.461725000 -0300", 
     "max_installments": 4, 
     "code": "CRT CREDIT", 
-    "status": "active" 
+    "icon": {
+      "id": 1,
+      "blob": {
+        "key": "8751nvuq66gtd9vfj8cl1lsdu1p2",
+        "filename": "mastercardd_icon.svg"
+      }
+    }
   },
   { 
     "id": 2, 
     "name": "Boleto", 
-    "created_at": "2021-03-25 20:47:39.461725000 -0300", 
-    "updated_at": "2021-03-25 20:47:39.461725000 -0300", 
     "max_installments": 1, 
     "code": "BOLET", 
-    "status": "active" 
+    "icon": {
+      "id": 1,
+      "blob": {
+        "key": "x8s2l0nyon8jrv32yo54e0tqox38",
+        "filename": "boleto.svg"
+      }
+    }
   }
 ]
 ```
