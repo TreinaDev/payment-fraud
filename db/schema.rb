@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_04_01_012707) do
   end
 
   create_table "receipts", force: :cascade do |t|
-    t.integer "token_receipt"
+    t.string "token_receipt"
     t.integer "number_installment"
     t.integer "payment_id", null: false
     t.datetime "created_at", precision: 6, null: false
