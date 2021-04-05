@@ -44,4 +44,3 @@ FactoryBot.create(:negative_list, {
     cpf: '39563911016',
     expiration_date: 1.month.from_now,
 })
-
