@@ -34,5 +34,7 @@ module PaymentFraud
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    
+    config.external_apis = config_for(:external_apis)
   end
 end

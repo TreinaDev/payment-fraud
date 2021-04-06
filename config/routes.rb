@@ -15,4 +15,6 @@ Rails.application.routes.draw do
       resources :payments, only: %i[ show create update ], param: :token
     end
   end
+
+  resources :receipts, only: %i[ show ], param: :token
 end
