@@ -13,7 +13,7 @@ class Cpf
     return true if fraud_events.count >= 3
 
     fraud_events.each do |fraud_event|
-      return true if fraud_event.event_severity == 1
+      return true if fraud_event.high?
     end
     false
   end
