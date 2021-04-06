@@ -16,4 +16,6 @@ Rails.application.routes.draw do
       resources :fraud_events, only: %i[create]
     end
   end
+
+  resources :receipts, only: %i[ show ], param: :token
 end

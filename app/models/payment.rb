@@ -1,6 +1,7 @@
 class Payment < ApplicationRecord
   # TODO: Validar Payment Method status active para criar payment (tentar before_save)
   belongs_to :payment_method
+  has_one :receipt, dependent: :delete
 
   has_secure_token :payment_token
 
@@ -21,6 +22,12 @@ class Payment < ApplicationRecord
     else
       approved!
     end
+    generate_receipt
+  end
+
+  def generate_receipt
+    token = Receipt.valid_token
+    Receipt.create!(token_receipt: token, number_installment: 1, payment_id: id)
   end
 
   def payment_method_status?
